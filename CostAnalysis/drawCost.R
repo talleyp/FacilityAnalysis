@@ -2,7 +2,7 @@ library(reshape2)
 library(ggplot2)
 library(RColorBrewer)
 
-data <- as.matrix(read.table("cost.csv", sep=","))
+
 
 heatPlot <- function(data, title, file){
   longData <- melt(data)
@@ -15,11 +15,21 @@ heatPlot <- function(data, title, file){
   zp1 <- zp1 + scale_y_discrete(expand = c(0, 0))
   zp1 <- zp1 + coord_equal()
   zp1 <- zp1 + theme_bw()
-  zp1 <- zp1 + ggtitle(title) 
+  zp1 <- zp1 + ggtitle(title)  + labs(x = "Width", y = "Length")
   ggsave(file)
   hist(data[,1])
   print(zp1)
 }
+rotate <- function(x) apply(t(x),1,rev)
 
-heatPlot(log(cost), "Facility Cost", "costsPlant.png")
+nochange <- as.matrix(read.table("costNoChange.csv", sep=","))
+nochange <- rotate(nochange)
+heatPlot(log(nochange), "No Change", "costsNoChange.png")
 
+flip <- as.matrix(read.table("costFlipWS.csv", sep=","))
+flip <- rotate(flip)
+heatPlot(log(flip), "Flipped Workstation", "FlippedWorkstation.png")
+
+fullchange <- as.matrix(read.table("costFullChange.csv", sep=","))
+fullchange <- rotate(fullchange)
+heatPlot(log(fullchange), "Complete Alteration", "completChange.png")
