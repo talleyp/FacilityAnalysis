@@ -27,9 +27,10 @@ tvNo2 <- noNorm[(1:(6*48)),(30*48):(62*38)]
 tvFull1 <- fullNorm[1:(48*2),(30*48):(62*48)]
 tvFull2 <- fullNorm[1:(48*16),(10*48):(26*48)]
 
-kingRow <- (21*48):(36*48)
-kingCol <- 1:(29*48)
-
+kingRow1 <- (21*48):(36*48)
+kingCol1 <- 1:(29*48)
+king1 <- kingnorm[kingRow1,kingCol1]
+king2 <- kingnorm[1:(48*2),(30*48):(62*48)]
 
 noChangeCost <- mean(tail(sort(c(tvNo1,tvNo2)),gArea)) * fCost * gArea / 365 
 ## $5.93/ (day*gaylord)
@@ -37,5 +38,5 @@ noChangeCost <- mean(tail(sort(c(tvNo1,tvNo2)),gArea)) * fCost * gArea / 365
 fullCost <- mean(tail(sort(c(tvFull1,tvFull2)),gArea)) * fCost * gArea / 365
 ## 1.53 / (day*gaylord)
 
-kingCost <- mean(tail(sort(kingnorm[kingRow,kingCol]),gArea)) * fCost * gArea / 365 
-## 1.20
+kingCost <- mean(tail(sort(c(king1,king2)),gArea)) * fCost * gArea / 365 
+## 1.20 / (day*gaylord)
