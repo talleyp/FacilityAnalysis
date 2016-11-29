@@ -33,3 +33,7 @@ heatPlot(log(flip), "Flipped Workstation", "FlippedWorkstation.png")
 fullchange <- as.matrix(read.table("costFullChange.csv", sep=","))
 fullchange <- rotate(fullchange)
 heatPlot(log(fullchange), "Complete Alteration", "completChange.png")
+
+king <- as.matrix(read.table("costKing.csv", sep=","))
+king <- rotate(king)
+heatPlot(log(king), "King Alteration", "kingChange.png")
